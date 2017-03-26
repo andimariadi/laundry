@@ -42,6 +42,7 @@
 				    <label>
 				      <input type="checkbox" name="login" value="y"> Ingat saya!
 				    </label>
+				    <p class="help-block" id="cookie" style="display: none">Anda tidak perlu lagi login selama 15 hari.</p>
 				  </div>
 				  <button type="submit" class="btn btn-primary">Masuk</button>
 				  <button type="reset" class="btn btn-default">Batal</button>
@@ -54,6 +55,15 @@
 <!-- footer start -->
 <?php $this->load->view('footer');?>
 <!-- footer end -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("input[name=login]").click(function(event) {
+			var atr = $("#cookie").attr("style")
+			$("#cookie").fadeToggle();
+			
+		})
+	});
+</script>
 
 </body>
 </html>

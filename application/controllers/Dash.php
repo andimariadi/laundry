@@ -13,15 +13,9 @@ class Dash extends CI_Controller
 		date_default_timezone_set('Asia/Jakarta');
 		//$models = array('CURL', 'Valid', 'Fungsi');
 		//$this->load->model($models);
-		if (empty($this->session->userdata('status'))) {
-			redirect(base_url());
+		if ($this->CURL->status('username') =='') {
+			redirect(base_url('home/logout'));
 		}
-	}
-	public function logout()
-	{
-		$this->session->sess_destroy();
-		$this->output->delete_cache();
-		redirect(base_url());
 	}
 	
 	public function index()
@@ -163,7 +157,6 @@ class Dash extends CI_Controller
 						<th>Kategori</th>
 						<th>Jumlah/Kg</th>
 						<th>Total Harga</th>
-						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -231,8 +224,7 @@ class Dash extends CI_Controller
 		echo "Beasa ################ <br>";
 		echo "<br>";
 
-		$mesg = "DAFTAR HADIR SISWA APA SAJA";
-		echo str_replace(" ", "_", strtolower($mesg));
+		$this->load->view('grafik');
 		
 	}
 
@@ -245,6 +237,10 @@ class Dash extends CI_Controller
         $total = $this->CURL->multijoinwhere('user', $join, $where, $order_by, $select)->result_array();
         echo rupiah($total[0]['total']);
 	}
+
+	
+
+	
 
 	/* ################################### hanya sebuah modal ################################
 

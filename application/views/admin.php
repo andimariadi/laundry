@@ -33,8 +33,8 @@
 				      <div class="panel-body">
 				        
 			  			
-			  			<li class="list-group-item"><a href="#" id="d_karyawan"><span class="glyphicon glyphicon-th-list"></span> Data Karyawan</a></li>
-  						<li class="list-group-item"><a href="#" id="t_karyawan"><span class="glyphicon glyphicon-plus"></span> Tambah Karyawan</a></li>
+			  			<li class="list-group-item"><a href="#" id="d_karyawan"><span class="glyphicon glyphicon-th-list"></span> Data Karyawan</a> <span class="badge"><?php $this->Form->hitung('user');?></span></li>
+  						<li class="list-group-item"><a href="#" id="t_karyawan"><span class="glyphicon glyphicon-plus"></span> Tambah Karyawan</a> <span class="badge"><span class="glyphicon glyphicon-plus-sign"></span></span></li>
 
 
 				      </div>
@@ -51,8 +51,9 @@
 				    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 				      <div class="panel-body">
 				        
-				        <li class="list-group-item"><a href="#" id="kategori"><span class="glyphicon glyphicon-folder-close"></span> Kategori</a></li>
-  						<li class="list-group-item"><a href="#" id="type"><span class="glyphicon glyphicon-menu-hamburger"></span> Type</a></li>
+				        <li class="list-group-item"><a href="#" id="type"><span class="glyphicon glyphicon-menu-hamburger"></span> Type</a> <span class="badge"><?php $this->Form->hitung('type');?></span></li>
+				        <li class="list-group-item"><a href="#" id="kategori"><span class="glyphicon glyphicon-folder-close"></span> Kategori</a> <span class="badge"><?php $this->Form->hitung('kategori');?></span></li>
+  						
 
 
 				      </div>
@@ -69,10 +70,10 @@
 				    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 				      <div class="panel-body">
 				        
-				        <li class="list-group-item"><a href="#" id="kategori"><span class="glyphicon glyphicon-folder-close"></span> Kategori</a></li>
-  						<li class="list-group-item"><a href="#" id="type"><span class="glyphicon glyphicon-menu-hamburger"></span> Type</a></li>
+				        <li class="list-group-item"><a href="#" id="grafik"><span class="glyphicon glyphicon-stats"></span> Grafik Pendapatan 5 Tahun</a></li>
+  						<li class="list-group-item"><a href="#" id="g-karyawan"><span class="glyphicon glyphicon-stats"></span> Grafik Pendapatan Karyawan</a></li>
 
-  						
+
 				      </div>
 				    </div>
 				  </div>

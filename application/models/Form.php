@@ -7,6 +7,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 class Form extends CI_Model
 {
+    public function hitung($table='')
+    {
+        $tables = $this->CURL->tampil($table);
+        echo count($tables);
+    }
+
     public function edit_text($table, $state, $data) {
     	echo '<br />';
     	if ($this->session->flashdata('done') != '') {
@@ -58,6 +64,63 @@ class Form extends CI_Model
             echo '<a class="btn btn-primary" id="btn-t-' . $table . '"><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</a> <a class="btn btn-default" id="btn-c-' . $table . '"><span class="glyphicon glyphicon-remove-circle"></span> Batal</a>';
         echo '</div></div>';
         echo '</form>';
+    }
+
+    public function grafik($value='', $title='')
+    {
+        ?>
+        <div id="bro"></div>
+        <script type="text/javascript">    
+            var chart;
+            $(document).ready(function() {
+                chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'bro', //letakan grafik di div id container
+                //Type grafik, anda bisa ganti menjadi area,bar,column dan bar
+                        type: 'column'
+                    },
+                    title: {
+                        text: "<?php echo $title;?>"
+                    },
+                    subtitle: {
+                        text: 'Laundry Andi'
+                    },
+                    xAxis: { //X axis menampilkan data tahun 
+                        categories: ['tahun']
+                    },
+                    yAxis: {
+                        title: {  //label yAxis
+                            text: 'pendapatan dalam Rupiah'
+                        }
+                    },
+                    tooltip: { 
+              //fungsi tooltip, ini opsional, kegunaan dari fungsi ini 
+              //akan menampikan data di titik tertentu di grafik saat mouseover
+                        formatter: function() {
+                                return '<b>'+ this.series.name +'</b><br/>'+
+                                'Rupiah: '+ this.y ;
+                        }
+                    },
+                    
+              //series adalah data yang akan dibuatkan grafiknya,
+              //saat ini mungkin anda heran, buat apa label indonesia dikanan 
+              //grafik, namun fungsi label ini sangat bermanfaat jika
+              //kita menggambarkan dua atau lebih grafik dalam satu chart,
+              //hah, emang bisa? ya jelas bisa dong, lihat tutorial selanjutnya 
+                    series: [
+        <?php
+            foreach ($value as $key) {
+                echo '{';
+                    echo 'name: \'' . $key['name'] . '\'';
+                    echo ',data: [' . $key['data'] . ']';
+                echo '},';
+            }
+        ?> 
+                    ]
+                });
+            });
+        </script>
+        <?php
     }
 }
 ?>

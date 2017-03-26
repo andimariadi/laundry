@@ -1,10 +1,4 @@
 $(document).ready(function() {
-    /* #################################### pencarian pendapatan #########################*/
-    $("#pendapatan").load('dash/pendapatan');
-    setInterval(function(){
-        $("#pendapatan").load('../dash/pendapatan');
-    }, 100);
-
     /* #################################### pencarian langsung #########################*/
     // tombol search klik
     $("#submit").click(function(event) {
@@ -404,4 +398,12 @@ $(document).ready(function() {
             }
         });
     });
+
+    /* #################################### Grafik ############################## */
+    $(document).on("click", '#grafik', function(e) {
+        $('#begin').load('admin/grafik/tahun');
+    });
+    $(document).on("click", '#g-karyawan', function(e) {
+        $('#begin').load('admin/grafik/karyawan');
+    })
 });

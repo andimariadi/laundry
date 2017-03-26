@@ -79,7 +79,23 @@ class CURL extends CI_Model
 		$this->db->where($where);
 		$this->db->order_by($order_by['order'], $order_by['by']);
 		return $this->db->get();
+	}
+	public function multijoin($table, $join, $order_by, $select)
+	{
+		$this->db->select($select);
+		$this->db->from($table);
+		foreach ($join as $data => $value) {
+			$this->db->join($data, $value, 'left');
+		}
+		$this->db->order_by($order_by['order'], $order_by['by']);
+		return $this->db->get();
 
+	}
+
+	public function query($query)
+	{
+		$query = $this->db->query($query);
+		return $query->result_array();
 	}
 }
 ?>

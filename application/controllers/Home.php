@@ -22,12 +22,20 @@ class Home extends CI_Controller {
 	{
 		parent::__construct();
 		//$this->load->model('CURL');
-		if ($this->session->userdata('status') == 'login') {
-			redirect(base_url('/dash'));
-		}
 	}
+	public function logout()
+	{
+		delete_cookie('login');
+		$this->output->delete_cache();
+		$this->session->sess_destroy();
+		redirect(base_url());
+	}
+
 	public function index()
 	{
+		if (get_cookie('login')!='') {
+			redirect(base_url('/dash'));
+		}
 		$this->load->view('index');
 	}
 	
@@ -69,9 +77,10 @@ class Home extends CI_Controller {
 		if ($tampil->num_rows() > 0) {
 			if (password_verify($password, trim($datas[0]['password']))) {
 				if ($this->input->post('login') == 'y') {
-					$session = array('username' => $data['username'], 'status' => 'login');
+					set_cookie('login', random_int(0, 100), 3600*24*15);
+					$session = array('username' => $data['username']);
 				} else {
-					$session = array('username' => $data['username'], 'status' => 'false');
+					$session = array('username' => $data['username']);
 				}
 				$this->session->set_userdata($session);
 				redirect(base_url('/dash'));

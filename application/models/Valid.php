@@ -519,34 +519,17 @@ class Valid extends CI_Model
 						<th>Nama</th>
 						<th>Alamat</th>
 						<th>Nomor Handphone</th>
-						<th>Pendapatan</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>';
-
-			/*
-			SELECT SUM(`pesanan`.`jumlah_kg`*`kategori`.`harga_kg`)+`type`.`harga` as `total` FROM `user`
-INNER JOIN `list` ON `user`.`no_user`=`list`.`no_user`
-LEFT JOIN `type` ON `list`.`no_type`=`type`.`no_type`
-LEFT JOIN `pesanan` ON `list`.`no_resi` = `pesanan`.`no_resi`
-LEFT JOIN `kategori` ON `pesanan`.`kode_kategori`=`kategori`.`kode_kategori`
-WHERE `user`.`no_user`=1
-			*/
-			$join = array('list' => '`user`.`no_user`=`list`.`no_user`', 'type' => '`list`.`no_type`=`type`.`no_type`', 'pesanan' => '`list`.`no_resi` = `pesanan`.`no_resi`', 'kategori' => '`pesanan`.`kode_kategori`=`kategori`.`kode_kategori`');
-			
-			$order_by = array('order' => 'user.no_user', 'by' => 'ASC');
-			$select = 'SUM(`pesanan`.`jumlah_kg`*`kategori`.`harga_kg`)+`type`.`harga` as `total`';
 			foreach ($table as $data) {
-				$where = array('user.no_user' => $data['no_user']);
-				$total = $this->CURL->multijoinwhere('user', $join, $where, $order_by, $select)->result_array();
 				echo '<tr>';
 					echo '<td class="col-md-2">' . $data['username'] . "</td>";
 					echo '<td class="col-md-1">' . $data['no_ktp'] . "</td>";
 					echo '<td class="col-md-3">' . $data['nama'] . "</td>";
 					echo '<td class="col-md-2">' . $data['alamat'] . "</td>";
 					echo '<td class="col-md-2">' . $data['no_hp'] . "</td>";
-					echo '<td class="col-md-2">' . rupiah($total[0]['total']) . "</td>";
 					echo '<td class="col-md-2"><a href="#" class="delkar" id="' . $data['no_user'] . '"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="left" title="Hapus Data"></span></a> <a href="#" class="editkar" id="' . $data['no_user'] . '"><span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Edit Data"></span></a> <a href="#" class="edpass" id="' . $data['username'] . '">
 						<span class="glyphicon glyphicon-lock"></span></a>
 					</td>';

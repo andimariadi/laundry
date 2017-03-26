@@ -37,8 +37,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
         $data = password_hash($data, PASSWORD_DEFAULT);
 
         $kode1 = date('now') . time('now');
-        $con = noalpa(strlen($kode1)/rand(100, 0));
-        $kode1 = substr($con, strlen($con)/rand(5,0), 3);
+        $con = strlen($kode1);
+        $kode1 = substr($kode1, $con-3, 3);
         
         $kode2 = md5($data);
         $kode2 = substr($kode2, 0, 5);

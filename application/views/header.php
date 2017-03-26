@@ -26,7 +26,7 @@
             <li><a href="#">Profile</a></li>
             <li><a href="#">Change Password</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="<?php echo base_url('dash/logout');?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li><a href="<?php echo base_url('home/logout');?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           </ul>
         </li>
       </ul>

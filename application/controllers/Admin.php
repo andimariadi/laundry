@@ -287,5 +287,28 @@ class Admin extends CI_Controller {
 		$this->CURL->edit($page, $where, $data);
 	}
 
+	public function grafik($page='')
+	{
+		if ($page=='tahun') {
+			# code...
+			$cek = $this->CURL->query('SELECT * FROM `list` WHERE DATE_FORMAT(`tanggal_masuk`, \'%Y\') = ' . date('Y'));
+			$date_awal = date('Y', strtotime($cek[0]['tanggal_masuk'] . '-5 YEAR'));
+			$date_akhir = date('Y', strtotime($cek[0]['tanggal_masuk']));
+
+			$total = $this->CURL->query('SELECT DATE_FORMAT(`list`.`tanggal_masuk`, \'%Y\') as name,SUM(`pesanan`.`jumlah_kg`*`kategori`.`harga_kg`)+`type`.`harga` as `data` FROM `list` 
+			LEFT JOIN `pesanan` ON `list`.`no_resi` = `pesanan`.`no_resi`
+			LEFT JOIN `kategori` ON `pesanan`.`kode_kategori` = `kategori`.`kode_kategori`
+			LEFT JOIN `type` ON `list`.`no_type`=`type`.`no_type`
+			WHERE DATE_FORMAT(`tanggal_masuk`, \'%Y\') BETWEEN ' . $date_awal . ' AND ' . $date_akhir . ' GROUP BY DATE_FORMAT(`tanggal_masuk`, \'%Y\')');
+			$this->Form->grafik($total, 'Pendapatan Per 5 tahun Laundry');
+		}
+
+		elseif ($page=='karyawan') {
+			$total = $this->CURL->query('SELECT `user`.`nama` as name,SUM(`pesanan`.`jumlah_kg`*`kategori`.`harga_kg`)+`type`.`harga` as `data` FROM `list` LEFT JOIN `user` ON `list`.`no_user`=`user`.`no_user` LEFT JOIN `pesanan` ON `list`.`no_resi` = `pesanan`.`no_resi` LEFT JOIN `kategori` ON `pesanan`.`kode_kategori` = `kategori`.`kode_kategori` LEFT JOIN `type` ON `list`.`no_type`=`type`.`no_type` GROUP BY `list`.`no_user` ');
+			$this->Form->grafik($total, 'Pendapatan Per Karyawan Laundry');
+		}
+		
+	}
+
 }
 ?>
